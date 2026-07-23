@@ -585,6 +585,26 @@
       color:transparent;
     }
 
+
+    .stock-badge {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,82,104,.35);
+      background: rgba(255,82,104,.10);
+      color: #ff8fa0;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+    .buy-btn[disabled] {
+      cursor: not-allowed;
+      opacity: .45;
+      transform: none !important;
+    }
+
     @media (max-width: 850px) {
       .hero { grid-template-columns: 1fr; }
       .products, .features { grid-template-columns: 1fr; }
@@ -678,9 +698,10 @@
           <div class="product-body">
             <h3>Vented Plate</h3>
             <p>A custom front plate with vents for airflow and a sharp racing-style finish.</p>
+            <span class="stock-badge">Out of stock</span>
             <div class="price-row">
               <span class="price">R700</span>
-              <button class="buy-btn" data-name="Vented Plate" data-price="700">Add to cart</button>
+              <button class="buy-btn" type="button" disabled aria-disabled="true">Out of stock</button>
             </div>
           </div>
         </article>
