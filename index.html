@@ -495,6 +495,57 @@
       transform: translateX(-50%) translateY(0);
     }
 
+
+    .tutorial-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 11px 14px;
+      border: 1px solid rgba(0,217,255,.30);
+      border-radius: 12px;
+      background: rgba(0,217,255,.08);
+      color: var(--blue);
+      cursor: pointer;
+      font-weight: 900;
+    }
+    .tutorial-modal {
+      position: fixed;
+      inset: 50% auto auto 50%;
+      z-index: 80;
+      width: min(720px, 94vw);
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translate(-50%, -48%) scale(.96);
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: #0e131b;
+      box-shadow: 0 30px 90px rgba(0,0,0,.65);
+      transition: .2s ease;
+    }
+    .tutorial-modal.open {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .tutorial-content { padding: 22px; }
+    .tutorial-warning {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,82,104,.28);
+      background: rgba(255,82,104,.08);
+      color: #ffd6dc;
+      line-height: 1.5;
+    }
+    .tutorial-steps {
+      margin: 18px 0 0;
+      padding-left: 22px;
+      color: #dbe3ee;
+      line-height: 1.65;
+    }
+    .tutorial-steps li { margin-bottom: 12px; }
+    .tool-list { color: var(--muted); line-height: 1.6; }
+
     @media (max-width: 850px) {
       .hero { grid-template-columns: 1fr; }
       .products, .features { grid-template-columns: 1fr; }
@@ -562,6 +613,7 @@
               <span class="price">R500</span>
               <button class="buy-btn" data-name="Baja Light" data-price="500">Add to cart</button>
             </div>
+            <button class="tutorial-btn" id="openBajaTutorial">View installation tutorial</button>
           </div>
         </article>
 
@@ -659,9 +711,12 @@
       <button class="close" id="closeCheckout" aria-label="Close checkout">×</button>
     </div>
 
-    <form class="checkout-content" id="checkoutForm" name="order" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html"><input type="hidden" name="form-name" value="order"><p style="display:none"><label>Do not fill this out: <input name="bot-field"></label></p><input type="hidden" id="orderDetails" name="order_details"><input type="hidden" id="orderTotal" name="order_total">
+    <form class="checkout-content" id="checkoutForm" action="https://formspree.io/f/xgoglgdn" method="POST">
+      <input type="hidden" id="orderDetails" name="order_details">
+      <input type="hidden" id="orderTotal" name="order_total">
+      <input type="hidden" name="_subject" value="New Sur-Ron Shop Order"><input type="hidden" name="form-name" value="order"><p style="display:none"><label>Do not fill this out: <input name="bot-field"></label></p><input type="hidden" id="orderDetails" name="order_details"><input type="hidden" id="orderTotal" name="order_total">
       <p class="notice">
-        Enter your shipping details below. Your order will be stored securely in Netlify Forms. No card details are collected on this website. Secure online payment can be added later through a verified PayFast merchant account.
+        Enter your shipping details below. Your order will be sent securely through Formspree. No card details are collected on this website. We will contact you to arrange payment securely.
       </p>
 
       <div class="form-section">
@@ -723,6 +778,39 @@
     </form>
   </section>
 
+
+  <section class="tutorial-modal" id="bajaTutorialModal" aria-label="Baja light installation tutorial">
+    <div class="panel-head">
+      <h2>Baja Light Installation Tutorial</h2>
+      <button class="close" id="closeBajaTutorial" aria-label="Close tutorial">×</button>
+    </div>
+    <div class="tutorial-content">
+      <p class="tutorial-warning">
+        Safety first: switch the bike off, remove the key, and disconnect the battery before working on the wiring.
+        Brackets and wire colours can differ between Sur-Ron models and light kits. Follow the instructions supplied
+        with your kit and ask a qualified adult or bike technician for help if you are unsure.
+      </p>
+      <h3>Tools you may need</h3>
+      <p class="tool-list">Allen keys, small spanners or sockets, cable ties, electrical tape or heat-shrink, and the bracket and wiring harness supplied with the light.</p>
+      <h3>Installation steps</h3>
+      <ol class="tutorial-steps">
+        <li><strong>Prepare the bike.</strong> Park it securely, switch it off, remove the key, and disconnect the battery.</li>
+        <li><strong>Remove the original light or plate.</strong> Support it while loosening the bolts. Do not pull on the wires.</li>
+        <li><strong>Fit the Baja-light bracket.</strong> Align it with the front mounting points and start every bolt by hand.</li>
+        <li><strong>Mount the light.</strong> Attach the light to the bracket, but leave it slightly loose for aiming.</li>
+        <li><strong>Connect the harness.</strong> Use the supplied plug and never force a connector.</li>
+        <li><strong>Secure the wiring.</strong> Keep it away from the tyre, brake hose, steering movement, sharp edges, and hot parts.</li>
+        <li><strong>Reconnect and test.</strong> Reconnect the battery, switch the bike on, and test the light.</li>
+        <li><strong>Check steering movement.</strong> Turn the handlebars fully left and right to make sure the wire does not stretch.</li>
+        <li><strong>Aim the beam.</strong> Point it slightly downward so it lights the road without dazzling other people.</li>
+        <li><strong>Final check.</strong> Tighten the bolts and check everything again after the first short ride.</li>
+      </ol>
+      <p class="notice">
+        Do not connect bare wires straight to the battery unless the kit specifically supports it and includes the correct fuse, switch, voltage rating, and wiring instructions.
+      </p>
+    </div>
+  </section>
+
   <div class="toast" id="toast">Added to cart</div>
 
   <script>
@@ -761,6 +849,7 @@
     function closeAll() {
       cartPanel.classList.remove('open');
       checkoutModal.classList.remove('open');
+      document.getElementById('bajaTutorialModal').classList.remove('open');
       setOverlay(false);
     }
 
@@ -854,25 +943,39 @@
       const submitButton = checkoutForm.querySelector('.place-order');
       const originalText = submitButton.textContent;
       submitButton.disabled = true;
-      submitButton.textContent = 'Submitting order...';
+      submitButton.textContent = 'Sending order...';
 
       try {
         const formData = new FormData(checkoutForm);
-        const response = await fetch('/', {
+        const response = await fetch('https://formspree.io/f/xgoglgdn', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData).toString()
+          body: formData,
+          headers: { 'Accept': 'application/json' }
         });
 
         if (!response.ok) throw new Error('Order submission failed');
 
-        window.location.href = '/success.html';
+        cart.length = 0;
+        checkoutForm.reset();
+        document.getElementById('country').value = 'South Africa';
+        renderCart();
+        window.location.href = 'success.html';
       } catch (error) {
         submitButton.disabled = false;
         submitButton.textContent = originalText;
-        showToast('Could not submit. Please check your connection.');
+        showToast('Could not send order. Please try again.');
       }
     });
+
+
+    document.getElementById('openBajaTutorial').addEventListener('click', () => {
+      cartPanel.classList.remove('open');
+      checkoutModal.classList.remove('open');
+      document.getElementById('bajaTutorialModal').classList.add('open');
+      setOverlay(true);
+    });
+
+    document.getElementById('closeBajaTutorial').addEventListener('click', closeAll);
 
     renderCart();
   </script>
