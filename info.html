@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sur-Ron Shop | Info</title>
+  <style>
+    :root{
+      --bg:#030508;--panel:#0d1219;--panel2:#141b25;--text:#f7fbff;--muted:#9aa7b7;
+      --green:#78ff3b;--cyan:#00d9ff;--purple:#8f5cff;--border:rgba(255,255,255,.10)
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 5%,rgba(0,217,255,.13),transparent 28%),
+        radial-gradient(circle at 90% 30%,rgba(120,255,59,.09),transparent 28%),
+        var(--bg);
+    }
+    body::before{
+      content:"";position:fixed;inset:0;pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+      background-size:34px 34px;
+    }
+    header{
+      position:sticky;top:0;z-index:10;
+      background:rgba(3,5,8,.84);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      max-width:1100px;margin:auto;padding:16px 22px;
+      display:flex;justify-content:space-between;align-items:center;gap:14px
+    }
+    .home{
+      padding:11px 15px;border-radius:999px;border:1px solid var(--border);
+      color:white;text-decoration:none;font-weight:900;background:rgba(255,255,255,.04)
+    }
+    .brand{font-weight:900;letter-spacing:.8px;color:var(--cyan)}
+    main{max-width:1100px;margin:auto;padding:72px 22px 90px;position:relative;z-index:1}
+    .eyebrow{color:var(--green);font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:13px}
+    h1{font-size:clamp(48px,7vw,82px);margin:10px 0 18px;letter-spacing:-4px}
+    .lead{color:var(--muted);font-size:19px;line-height:1.7;max-width:780px}
+    .grid{margin-top:38px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .card{
+      position:relative;overflow:hidden;
+      padding:24px;border:1px solid var(--border);border-radius:22px;
+      background:linear-gradient(160deg,var(--panel2),var(--panel));
+      box-shadow:0 18px 55px rgba(0,0,0,.35);
+      transition:.2s ease
+    }
+    .card:hover{transform:translateY(-5px);border-color:rgba(0,217,255,.28)}
+    .card::after{
+      content:"";position:absolute;width:120px;height:120px;border-radius:50%;right:-40px;bottom:-50px;
+      background:var(--glow);filter:blur(22px);opacity:.10
+    }
+    .card h2{margin:0 0 10px;font-size:22px}
+    .card p{margin:0;color:var(--muted);line-height:1.65}
+    .card:nth-child(odd){--glow:var(--green)}
+    .card:nth-child(even){--glow:var(--cyan)}
+    .cta{
+      display:inline-flex;align-items:center;gap:8px;
+      margin-top:34px;padding:14px 20px;border-radius:14px;
+      text-decoration:none;color:#061006;
+      background:linear-gradient(135deg,var(--green),var(--cyan));
+      font-weight:900;box-shadow:0 0 28px rgba(0,217,255,.18)
+    }
+    @media(max-width:760px){.grid{grid-template-columns:1fr}h1{letter-spacing:-2px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="home" href="index.html">← Home</a>
+      <div class="brand">SUR-RON SHOP INFO</div>
+    </div>
+  </header>
+
+  <main>
+    <div class="eyebrow">Everything you need to know</div>
+    <h1>About the website</h1>
+    <p class="lead">Sur-Ron Shop is an online parts store focused on simple upgrades that make your bike look better and work better. The website currently sells a Baja light, an underglow kit and a vented plate.</p>
+
+    <div class="grid">
+      <section class="card"><h2>🛒 What we sell</h2><p>Baja Light — R500<br>Underglow Kit — R350<br>Vented Plate — R700</p></section>
+      <section class="card"><h2>📦 How ordering works</h2><p>Add products to your cart, enter your shipping details and submit the order. You will then be contacted to confirm stock, delivery and payment.</p></section>
+      <section class="card"><h2>🔒 Payments</h2><p>The website does not collect card numbers, CVV codes, PINs or banking passwords. Payment must be arranged through a trusted and secure method.</p></section>
+      <section class="card"><h2>📱 Contact and social</h2><p>Follow the shop on TikTok at @zekxbtw.</p></section>
+      <section class="card"><h2>🛠️ Installation safety</h2><p>Switch the bike off and disconnect the battery before electrical work. Ask a qualified adult or bike technician for help if you are unsure.</p></section>
+      <section class="card"><h2>🌐 Website setup</h2><p>The website is hosted with GitHub Pages. Orders are sent through Formspree to the email connected to the form.</p></section>
+    </div>
+
+    <a class="cta" href="shop.html">Go to the shop →</a>
+  </main>
+</body>
+</html>
