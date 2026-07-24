@@ -605,6 +605,11 @@
       transform: none !important;
     }
 
+
+    .terms-check{margin-top:18px;display:flex;align-items:flex-start;gap:10px;padding:14px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.025)}
+    .terms-check input{width:auto;margin-top:3px;accent-color:var(--green)}
+    .terms-check label{line-height:1.5;font-weight:700}
+    .terms-check a{color:var(--blue)}
     @media (max-width: 850px) {
       .hero { grid-template-columns: 1fr; }
       .products, .features { grid-template-columns: 1fr; }
@@ -616,6 +621,9 @@
       .field.full { grid-column: auto; }
       h1 { letter-spacing: -2px; }
     }
+  
+    .legal-links{margin-top:12px;text-align:center}
+    .legal-links a{color:inherit;text-decoration:underline;text-underline-offset:3px}
   </style>
 </head>
 <body>
@@ -747,7 +755,7 @@
         ♪ Follow @zekxbtw on TikTok
       </a>
     </div>
-  </footer>
+  <div class="legal-links"><a href="terms.html">Terms &amp; Conditions</a></div></footer>
 
   <div class="overlay" id="overlay"></div>
 
@@ -835,6 +843,10 @@
       </div>
 </div>
 
+      <div class="terms-check">
+        <input id="agreeTerms" name="terms_accepted" type="checkbox" value="Yes" required>
+        <label for="agreeTerms">I have read and agree to the <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a>.</label>
+      </div>
       <div class="order-summary" id="orderSummary"></div>
       <button class="place-order" type="submit">Place order</button>
     </form>
