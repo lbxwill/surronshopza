@@ -74,9 +74,13 @@
   
 .release-banner{padding:11px 16px;text-align:center;font-weight:900;color:#061006;background:linear-gradient(90deg,#78ff3b,#00d9ff,#8f5cff)}
 .release-banner span{margin-left:8px;font-weight:700}
+
+.release-banner{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}
+.release-countdown{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;background:rgba(3,5,8,.84);color:#fff;border:1px solid rgba(255,255,255,.24);font-size:13px;font-weight:900}
+.release-countdown strong{color:#78ff3b}
 </style>
 </head>
-<body><div class="release-banner">Website releases on 15 August <span>Pre-orders are open now</span></div>
+<body><div class="release-banner">Website releases on 15 August <span>Pre-orders are open now</span><span class="release-countdown">⏳ <strong id="releaseCountdown">Loading…</strong></span></div>
   <header>
     <div class="nav">
       <a class="home" href="index.html">← Home</a>
@@ -90,7 +94,7 @@
     <p class="lead">Sur-Ron Shop is an online parts store focused on simple upgrades that make your bike look better and work better. The website currently sells a Baja light, an underglow kit and a vented plate.</p>
 
     <div class="grid">
-      <section class="card"><h2>🛒 What we sell</h2><p>Baja Light — R500<br>Underglow Kit — R350<br>Vented Plate — R700<br>Duck with Spinning Hat — Pre-order</p></section>
+      <section class="card"><h2>🛒 What we sell</h2><p>Baja Light — R500<br>Underglow Kit — R350<br>Vented Plate — R700<br>Duck with Spinning Hat — R200 preorder</p></section>
       <section class="card"><h2>📦 How ordering works</h2><p>Add products to your cart, enter your shipping details and submit the order. You will then be contacted to confirm stock, delivery and payment.</p></section>
       <section class="card"><h2>🔒 Payments</h2><p>The website does not collect card numbers, CVV codes, PINs or banking passwords. Payment must be arranged through a trusted and secure method.</p></section>
       <section class="card"><h2>📱 Contact and social</h2><p>Follow the shop on TikTok at @zekxbtw.</p></section>
@@ -100,5 +104,24 @@
 
     <a class="cta" href="shop.html">Go to the shop →</a>
   <div class="legal-links"><a href="terms.html">Terms &amp; Conditions</a></div></main>
+
+<script>
+(function(){
+  const el=document.getElementById('releaseCountdown');
+  if(!el)return;
+  const target=new Date('2026-08-15T18:00:00+02:00').getTime();
+  function tick(){
+    const left=target-Date.now();
+    if(left<=0){el.textContent='WEBSITE IS LIVE';return;}
+    const d=Math.floor(left/86400000);
+    const h=Math.floor((left%86400000)/3600000);
+    const m=Math.floor((left%3600000)/60000);
+    const s=Math.floor((left%60000)/1000);
+    el.textContent=`${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+</script>
 </body>
 </html>

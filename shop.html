@@ -630,9 +630,13 @@
   
 .release-banner{padding:11px 16px;text-align:center;font-weight:900;color:#061006;background:linear-gradient(90deg,#78ff3b,#00d9ff,#8f5cff)}
 .release-banner span{margin-left:8px;font-weight:700}
+
+.release-banner{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}
+.release-countdown{display:inline-flex;align-items:center;gap:7px;padding:6px 10px;border-radius:999px;background:rgba(3,5,8,.84);color:#fff;border:1px solid rgba(255,255,255,.24);font-size:13px;font-weight:900}
+.release-countdown strong{color:#78ff3b}
 </style>
 </head>
-<body><div class="release-banner">Website releases on 15 August <span>All available items are PRE-ORDER</span></div>
+<body><div class="release-banner">Website releases on 15 August <span>All available items are PRE-ORDER</span><span class="release-countdown">⏳ <strong id="releaseCountdown">Loading…</strong></span></div>
   <header>
     <div class="nav">
       <a href="index.html" class="cart-button" style="margin-right:10px;">← Home page</a>
@@ -1056,5 +1060,24 @@
 
     renderCart();
   </script>
+
+<script>
+(function(){
+  const el=document.getElementById('releaseCountdown');
+  if(!el)return;
+  const target=new Date('2026-08-15T18:00:00+02:00').getTime();
+  function tick(){
+    const left=target-Date.now();
+    if(left<=0){el.textContent='WEBSITE IS LIVE';return;}
+    const d=Math.floor(left/86400000);
+    const h=Math.floor((left%86400000)/3600000);
+    const m=Math.floor((left%3600000)/60000);
+    const s=Math.floor((left%60000)/1000);
+    el.textContent=`${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+</script>
 </body>
 </html>
