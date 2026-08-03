@@ -688,8 +688,8 @@
             <p>A fun handlebar duck with sunglasses, a gold chain and a spinning propeller hat.</p>
             <span class="preorder-badge">Pre-order</span>
             <div class="price-row">
-              <span class="price">Price TBC</span>
-              <button class="buy-btn preorder-btn" data-name="Duck with Spinning Hat (Pre-order)" data-price="0">Pre-order</button>
+              <span class="price">R200</span>
+              <button class="buy-btn preorder-btn" data-name="Duck with Spinning Hat (Pre-order)" data-price="200">Pre-order</button>
             </div>
           </div>
         </article>
@@ -975,15 +975,14 @@
         <div class="cart-item">
           <div>
             <strong>${item.name}</strong><br>
-            <small>${item.price === 0 ? 'Price TBC' : money(item.price)}</small>
+            <small>${money(item.price)}</small>
           </div>
           <button class="remove" onclick="removeItem(${index})">Remove</button>
         </div>
       `).join('');
 
       const total = cart.reduce((sum, item) => sum + item.price, 0);
-      const includesTbc = cart.some(item => item.price === 0);
-      cartTotal.textContent = includesTbc ? `${money(total)} + TBC item` : money(total);
+      cartTotal.textContent = money(total);
     }
 
     function renderOrderSummary() {
@@ -993,12 +992,12 @@
         ${cart.map(item => `
           <div class="summary-row">
             <span>${item.name}</span>
-            <span>${item.price === 0 ? 'Price TBC' : money(item.price)}</span>
+            <span>${money(item.price)}</span>
           </div>
         `).join('')}
         <div class="summary-row total">
           <span>Total</span>
-          <span>${cart.some(item => item.price === 0) ? `${money(total)} + TBC item` : money(total)}</span>
+          <span>${money(total)}</span>
         </div>
       `;
     }
@@ -1035,11 +1034,10 @@
       }
 
       const total = cart.reduce((sum, item) => sum + item.price, 0);
-      const orderText = cart.map(item => `${item.name} - ${item.price === 0 ? 'Price TBC' : 'R' + item.price}`).join(', ');
+      const orderText = cart.map(item => `${item.name} - R${item.price}`).join(', ');
 
       document.getElementById('orderDetails').value = orderText;
-      document.getElementById('orderTotal').value =
-        cart.some(item => item.price === 0) ? `R${total} + TBC item` : `R${total}`;
+      document.getElementById('orderTotal').value = `R${total}`;
 
       const submitButton = checkoutForm.querySelector('.place-order');
       submitButton.disabled = true;
