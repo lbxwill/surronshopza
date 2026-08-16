@@ -613,6 +613,34 @@
 
     .preorder-badge{display:inline-block;margin-top:10px;padding:7px 10px;border-radius:999px;border:1px solid rgba(143,92,255,.38);background:rgba(143,92,255,.12);color:#c7b2ff;font-size:12px;font-weight:900;text-transform:uppercase}
     .preorder-btn{background:linear-gradient(135deg,#8f5cff,#00d9ff)!important;color:white!important}
+
+    .variant-box{
+      margin-top:14px;
+      padding:12px;
+      border:1px solid var(--premium-border, var(--border));
+      border-radius:14px;
+      background:rgba(255,255,255,.025);
+    }
+    .variant-box label{
+      display:block;
+      margin-bottom:7px;
+      color:#cbd5e1;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.5px;
+      text-transform:uppercase;
+    }
+    .variant-box select{
+      width:100%;
+      padding:11px 12px;
+      border-radius:11px;
+      border:1px solid rgba(255,255,255,.10);
+      background:#070c12;
+      color:white;
+      font-weight:800;
+      cursor:pointer;
+    }
+
     @media (max-width: 850px) {
       .hero { grid-template-columns: 1fr; }
       .products, .features { grid-template-columns: 1fr; }
@@ -1060,9 +1088,16 @@ input,select{
             <h3>Baja Light</h3>
             <p>A bright front light for improved visibility and a tough off-road look.</p>
             <span class="preorder-badge">Available now</span>
+            <div class="variant-box">
+              <label for="bajaVariant">Choose option</label>
+              <select id="bajaVariant">
+                <option value="500" data-label="Baja Light">Baja Light only — R500</option>
+                <option value="600" data-label="Baja Light + Switch">Baja Light + Switch — R600</option>
+              </select>
+            </div>
             <div class="price-row">
-              <span class="price">R500</span>
-              <button class="buy-btn preorder-btn" data-name="Baja Light" data-price="500">Order</button>
+              <span class="price" id="bajaPrice">R500</span>
+              <button class="buy-btn preorder-btn" id="bajaOrderButton" data-name="Baja Light" data-price="500">Order</button>
             </div>
             <button class="tutorial-btn" id="openBajaTutorial">View installation tutorial</button>
           </div>
@@ -1450,6 +1485,23 @@ input,select{
     });
 
     document.getElementById('closeBajaTutorial').addEventListener('click', closeAll);
+
+
+    const bajaVariant = document.getElementById('bajaVariant');
+    const bajaPrice = document.getElementById('bajaPrice');
+    const bajaOrderButton = document.getElementById('bajaOrderButton');
+
+    if (bajaVariant && bajaPrice && bajaOrderButton) {
+      bajaVariant.addEventListener('change', () => {
+        const selected = bajaVariant.options[bajaVariant.selectedIndex];
+        const price = Number(selected.value);
+        const label = selected.dataset.label;
+
+        bajaPrice.textContent = `R${price}`;
+        bajaOrderButton.dataset.price = String(price);
+        bajaOrderButton.dataset.name = label;
+      });
+    }
 
     renderCart();
   </script>
