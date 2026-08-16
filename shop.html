@@ -1311,11 +1311,19 @@ input,select{
       setOverlay(false);
     }
 
+    function resetCheckoutButton() {
+      const submitButton = checkoutForm.querySelector('.place-order');
+      if (!submitButton) return;
+      submitButton.disabled = false;
+      submitButton.textContent = 'Place order';
+    }
+
     function openCheckout() {
       if (!cart.length) {
         showToast('Your cart is empty');
         return;
       }
+      resetCheckoutButton();
       cartPanel.classList.remove('open');
       renderOrderSummary();
       checkoutModal.classList.add('open');
@@ -1385,10 +1393,13 @@ input,select{
     document.getElementById('checkoutButton').addEventListener('click', openCheckout);
     overlay.addEventListener('click', closeAll);
 
+    let orderSubmitting = false;
+
     checkoutForm.addEventListener('submit', (event) => {
       if (!cart.length) {
         event.preventDefault();
         showToast('Your cart is empty');
+        resetCheckoutButton();
         return;
       }
 
@@ -1399,8 +1410,35 @@ input,select{
       document.getElementById('orderTotal').value = `R${total}`;
 
       const submitButton = checkoutForm.querySelector('.place-order');
+      orderSubmitting = true;
       submitButton.disabled = true;
       submitButton.textContent = 'Sending order...';
+
+      // If Formspree does not navigate away for any reason, unlock the button.
+      setTimeout(() => {
+        if (!document.hidden) {
+          orderSubmitting = false;
+          resetCheckoutButton();
+        }
+      }, 7000);
+    });
+
+    // Browsers can restore the previous page from memory after an order.
+    // Always return checkout to a clean, usable state.
+    window.addEventListener('pageshow', (event) => {
+      resetCheckoutButton();
+
+      if (event.persisted || orderSubmitting) {
+        orderSubmitting = false;
+        checkoutForm.reset();
+
+        const country = document.getElementById('country');
+        if (country) country.value = 'South Africa';
+
+        cart.length = 0;
+        renderCart();
+        closeAll();
+      }
     });
 
 
