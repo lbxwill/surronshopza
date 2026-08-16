@@ -1430,9 +1430,12 @@ input,select{
 
     let orderSubmitting = false;
 
-    checkoutForm.addEventListener('submit', (event) => {
+    checkoutForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      if (orderSubmitting) return;
+
       if (!cart.length) {
-        event.preventDefault();
         showToast('Your cart is empty');
         resetCheckoutButton();
         return;
@@ -1449,35 +1452,50 @@ input,select{
       submitButton.disabled = true;
       submitButton.textContent = 'Sending order...';
 
-      // If Formspree does not navigate away for any reason, unlock the button.
-      setTimeout(() => {
-        if (!document.hidden) {
-          orderSubmitting = false;
-          resetCheckoutButton();
+      try {
+        const formData = new FormData(checkoutForm);
+
+        const response = await fetch(checkoutForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          let message = 'Could not send order. Please try again.';
+          if (response.status === 429) {
+            message = 'Too many orders were sent too quickly. Please wait a minute and try again.';
+          }
+          throw new Error(message);
         }
-      }, 7000);
-    });
 
-    // Browsers can restore the previous page from memory after an order.
-    // Always return checkout to a clean, usable state.
-    window.addEventListener('pageshow', (event) => {
-      resetCheckoutButton();
-
-      if (event.persisted || orderSubmitting) {
-        orderSubmitting = false;
+        // Clear the order only after Formspree confirms it was received.
+        cart.length = 0;
+        renderCart();
         checkoutForm.reset();
 
         const country = document.getElementById('country');
         if (country) country.value = 'South Africa';
 
-        cart.length = 0;
-        renderCart();
-        closeAll();
+        // Go to our own branded success page, not Formspree's page.
+        window.location.href = 'success.html';
+
+      } catch (error) {
+        orderSubmitting = false;
+        resetCheckoutButton();
+        showToast(error.message || 'Could not send order. Please try again.');
       }
     });
 
+    // Always make checkout usable if the browser restores the page.
+    window.addEventListener('pageshow', () => {
+      orderSubmitting = false;
+      resetCheckoutButton();
+    });
 
-    document.getElementById('openBajaTutorial').addEventListener('click', () => {
+document.getElementById('openBajaTutorial').addEventListener('click', () => {
       cartPanel.classList.remove('open');
       checkoutModal.classList.remove('open');
       document.getElementById('bajaTutorialModal').classList.add('open');
