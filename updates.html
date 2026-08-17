@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Updates | Sur-Ron Shop</title>
+  <style>
+    :root{
+      --bg:#05080c;--panel:#0d141c;--text:#f8fbff;--muted:#91a0b3;
+      --green:#78ff3b;--cyan:#18ddff;--border:rgba(255,255,255,.10);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;min-height:100vh;font-family:Arial,Helvetica,sans-serif;color:var(--text);
+      background:radial-gradient(circle at 12% 4%,rgba(24,221,255,.12),transparent 28%),
+                 radial-gradient(circle at 88% 12%,rgba(120,255,59,.10),transparent 26%),var(--bg);
+    }
+    header{
+      position:sticky;top:0;background:rgba(5,8,12,.84);backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      max-width:1050px;margin:auto;padding:15px 22px;display:flex;
+      align-items:center;justify-content:space-between;gap:14px;
+    }
+    .home{
+      padding:10px 14px;border-radius:999px;border:1px solid var(--border);
+      color:white;text-decoration:none;font-weight:900;background:rgba(255,255,255,.04);
+    }
+    .brand{font-weight:950;letter-spacing:.6px;color:var(--green)}
+    main{max-width:900px;margin:auto;padding:72px 22px 90px}
+    .eyebrow{
+      display:inline-flex;padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(120,255,59,.25);background:rgba(120,255,59,.06);
+      color:#a8ff78;font-size:12px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;
+    }
+    h1{margin:18px 0 12px;font-size:clamp(48px,8vw,78px);letter-spacing:-4px;line-height:.95}
+    .lead{max-width:650px;color:var(--muted);font-size:18px;line-height:1.65}
+    .update-card{
+      margin-top:36px;padding:28px;border-radius:24px;border:1px solid var(--border);
+      background:linear-gradient(160deg,rgba(255,255,255,.045),transparent 35%),
+                 linear-gradient(145deg,#111923,#0a1017);
+      box-shadow:0 24px 70px rgba(0,0,0,.42);
+    }
+    .status{
+      display:inline-flex;padding:7px 10px;border-radius:999px;
+      border:1px solid rgba(120,255,59,.28);background:rgba(120,255,59,.08);
+      color:#a8ff78;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.8px;
+    }
+    .update-card h2{margin:16px 0 8px;font-size:34px;letter-spacing:-1.5px}
+    .date{color:var(--cyan);font-size:20px;font-weight:900}
+    .update-card p{color:var(--muted);line-height:1.65}
+    .shop-btn{
+      display:inline-block;margin-top:24px;padding:14px 18px;border-radius:14px;
+      background:linear-gradient(135deg,var(--green),var(--cyan));color:#061006;
+      text-decoration:none;font-weight:900;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="home" href="index.html">← Home</a>
+      <div class="brand">SUR-RON SHOP UPDATES</div>
+    </div>
+  </header>
+  <main>
+    <div class="eyebrow">● Latest update</div>
+    <h1>Shop Updates</h1>
+    <p class="lead">Check here for new stock and product updates.</p>
+
+    <section class="update-card">
+      <span class="status">Coming soon</span>
+      <h2>Vented Plate</h2>
+      <div class="date">Coming 24 Aug – 4 Sept</div>
+      <p>The Vented Plate is currently out of stock. New stock is expected between 24 August and 4 September.</p>
+      <a class="shop-btn" href="shop.html">Back to shop</a>
+    </section>
+  </main>
+</body>
+</html>

@@ -676,6 +676,18 @@
 @keyframes shopIconPop{from{opacity:0;transform:scale(.4) rotate(-8deg)}to{opacity:1;transform:scale(1) rotate(0)}}
 @keyframes shopBar{to{width:220px}}
 
+
+    .updates-nav{
+      color:#a8ff78 !important;
+      font-weight:900 !important;
+    }
+    .updates-nav::before{
+      content:"●";
+      margin-right:6px;
+      color:#78ff3b;
+      font-size:9px;
+      vertical-align:middle;
+    }
 </style>
 
 <meta name="theme-color" content="#05080c">
@@ -1029,6 +1041,7 @@ input,select{
       </a>
       <nav class="nav-links">
         <a href="#products">Products</a>
+        <a href="updates.html" class="updates-nav">Updates</a>
         <a href="#why">Why us</a>
         <button class="cart-button" id="openCart">Cart (<span id="cartCount">0</span>)</button>
       </nav>
