@@ -1,207 +1,165 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Updates | Sur-Ron Shop</title>
-  <style>
-    :root{
-      --bg:#05080c;
-      --panel:#0d141c;
-      --text:#f8fbff;
-      --muted:#94a3b6;
-      --green:#78ff3b;
-      --cyan:#18ddff;
-      --border:rgba(255,255,255,.10);
-    }
-
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      min-height:100vh;
-      font-family:Arial,Helvetica,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 12% 5%,rgba(24,221,255,.12),transparent 28%),
-        radial-gradient(circle at 88% 10%,rgba(120,255,59,.09),transparent 26%),
-        var(--bg);
-    }
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:10;
-      background:rgba(5,8,12,.88);
-      backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--border);
-    }
-
-    .nav{
-      max-width:1000px;
-      margin:auto;
-      padding:16px 22px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:14px;
-    }
-
-    .back{
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      color:white;
-      text-decoration:none;
-      font-weight:900;
-    }
-
-    .title{
-      font-weight:950;
-      color:var(--green);
-      letter-spacing:.6px;
-    }
-
-    main{
-      width:min(900px,calc(100% - 40px));
-      margin:auto;
-      padding:70px 0 90px;
-    }
-
-    .small-title{
-      display:inline-flex;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(120,255,59,.25);
-      background:rgba(120,255,59,.06);
-      color:#a8ff78;
-      font-size:12px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.8px;
-    }
-
-    h1{
-      margin:18px 0 10px;
-      font-size:clamp(50px,8vw,78px);
-      line-height:.95;
-      letter-spacing:-4px;
-    }
-
-    .intro{
-      max-width:650px;
-      color:var(--muted);
-      font-size:18px;
-      line-height:1.65;
-    }
-
-    .update{
-      margin-top:34px;
-      padding:28px;
-      border-radius:24px;
-      border:1px solid var(--border);
-      background:
-        linear-gradient(160deg,rgba(255,255,255,.045),transparent 35%),
-        linear-gradient(145deg,#111923,#0a1017);
-      box-shadow:0 24px 70px rgba(0,0,0,.42);
-    }
-
-    .status{
-      display:inline-block;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(120,255,59,.28);
-      background:rgba(120,255,59,.08);
-      color:#a8ff78;
-      font-size:11px;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.8px;
-    }
-
-    .update h2{
-      margin:16px 0 8px;
-      font-size:34px;
-      letter-spacing:-1.4px;
-    }
-
-    .date{
-      color:var(--cyan);
-      font-size:21px;
-      font-weight:900;
-    }
-
-    .update p{
-      color:var(--muted);
-      line-height:1.65;
-    }
-
-    .shop-btn{
-      display:inline-block;
-      margin-top:20px;
-      padding:13px 17px;
-      border-radius:13px;
-      background:linear-gradient(135deg,var(--green),var(--cyan));
-      color:#061006;
-      text-decoration:none;
-      font-weight:900;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Updates | Sur-Ron Shop</title>
+<style>
+:root{
+  --bg:#05080c;
+  --panel:#0d141c;
+  --text:#f8fbff;
+  --muted:#95a4b6;
+  --green:#78ff3b;
+  --cyan:#18ddff;
+  --border:rgba(255,255,255,.10);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 12% 5%,rgba(24,221,255,.12),transparent 28%),
+    radial-gradient(circle at 88% 8%,rgba(120,255,59,.10),transparent 26%),
+    var(--bg);
+}
+header{
+  position:sticky;
+  top:0;
+  background:rgba(5,8,12,.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav{
+  max-width:980px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.back,.shop-link{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  color:white;
+  text-decoration:none;
+  font-weight:900;
+}
+.brand{
+  color:var(--green);
+  font-weight:950;
+  letter-spacing:.5px;
+}
+main{
+  width:min(900px,calc(100% - 36px));
+  margin:auto;
+  padding:62px 0 86px;
+}
+.tag{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(120,255,59,.25);
+  background:rgba(120,255,59,.06);
+  color:#a8ff78;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+}
+h1{
+  margin:18px 0 8px;
+  font-size:clamp(48px,8vw,76px);
+  letter-spacing:-4px;
+  line-height:.95;
+}
+.lead{
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.65;
+}
+.updates{
+  display:grid;
+  gap:18px;
+  margin-top:34px;
+}
+.card{
+  padding:26px;
+  border-radius:22px;
+  border:1px solid var(--border);
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.045),transparent 35%),
+    linear-gradient(145deg,#111923,#0a1017);
+  box-shadow:0 20px 60px rgba(0,0,0,.38);
+}
+.status{
+  display:inline-block;
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(120,255,59,.27);
+  background:rgba(120,255,59,.07);
+  color:#a8ff78;
+  font-size:10px;
+  font-weight:950;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+}
+.card h2{
+  margin:15px 0 7px;
+  font-size:31px;
+  letter-spacing:-1px;
+}
+.date{
+  color:var(--cyan);
+  font-size:20px;
+  font-weight:950;
+}
+.card p{
+  color:var(--muted);
+  line-height:1.6;
+  margin-bottom:0;
+}
+@media(max-width:620px){
+  .brand{font-size:12px}
+  .shop-link{display:none}
+}
+</style>
 </head>
 <body>
-
 <header>
   <div class="nav">
     <a class="back" href="index.html">← Home</a>
-    <div class="title">SUR-RON SHOP UPDATES</div>
+    <div class="brand">SUR-RON SHOP UPDATES</div>
+    <a class="shop-link" href="shop.html">Shop</a>
   </div>
 </header>
 
 <main>
-  <div class="small-title">● Latest update</div>
-
+  <div class="tag">● Latest stock news</div>
   <h1>Updates</h1>
+  <p class="lead">Check here for new stock and product availability.</p>
 
-  <p class="intro">
-    Check here for stock updates and new product announcements.
-  </p>
+  <div class="updates">
+    <section class="card">
+      <span class="status">Coming soon</span>
+      <h2>Vented Plate</h2>
+      <div class="date">Coming 24 Aug – 4 Sept</div>
+      <p>The Vented Plate is currently out of stock. New stock is expected between 24 August and 4 September.</p>
+    </section>
 
-  <section class="update">
-    <span class="status">Coming soon</span>
-
-    <h2>Vented Plate</h2>
-
-    <div class="date">
-      Coming 24 Aug – 4 Sept
-    </div>
-
-    <p>
-      The Vented Plate is currently out of stock.
-      New stock is expected between 24 August and 4 September.
-    </p>
-
-    <a class="shop-btn" href="shop.html">Go to shop</a>
-  </section>
-
-  <section class="update">
-    <span class="status">Coming soon</span>
-
-    <h2>Baja Light + Switch</h2>
-
-    <div class="date">
-      Coming 24 Aug – 4 Sept
-    </div>
-
-    <p>
-      The Baja Light + Switch option costs R600.
-      Stock is expected between 24 August and 4 September.
-    </p>
-
-    <a class="shop-btn" href="shop.html">Go to shop</a>
-  </section>
-
+    <section class="card">
+      <span class="status">Coming soon</span>
+      <h2>Baja Light + Switch — R600</h2>
+      <div class="date">Coming 24 Aug – 4 Sept</div>
+      <p>The Baja Light + Switch option is expected to be available between 24 August and 4 September.</p>
+    </section>
+  </div>
 </main>
-
 </body>
 </html>
